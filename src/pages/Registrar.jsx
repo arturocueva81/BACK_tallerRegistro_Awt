@@ -60,7 +60,7 @@ function Registrar() {
         <div className="pantalla">
             <div className="panel-izquierdo">
                 <h1>Refugio Patitas al Rescate</h1>
-                <p>Crea una cuenta para acceder al sistema.</p>
+                <h2>Crea una cuenta para acceder al sistema.</h2>
             </div>
 
             <div className="panel-derecho">

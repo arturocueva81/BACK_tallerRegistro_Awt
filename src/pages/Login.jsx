@@ -36,6 +36,7 @@ function Login() {
             if (respuesta.ok) {
                 let resultado = await respuesta.json();
                 localStorage.setItem("token", resultado.token);
+                localStorage.setItem("rol", resultado.rol);
                 navigate("/perfil");
             } else {
                 setMensaje("Usuario o contraseña incorrectos");
@@ -48,7 +49,7 @@ function Login() {
     return (
         <div className="pantalla">
             <div className="panel-izquierdo">
-                <h1> Bienvenidos al Refugio: Patitas al Rescate</h1> 
+                <h1>Refugio Patitas al Rescate</h1>
                 <h2>Sistema de acceso para voluntarios y adoptantes.</h2>
             </div>
 

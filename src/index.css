@@ -5,8 +5,8 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #f0f2f5;
   color: #333;
 }
 
@@ -29,12 +29,16 @@ body {
 
 .panel-izquierdo h1 {
   font-size: 2rem;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .panel-izquierdo p {
   font-size: 1rem;
-  line-height: 1.5;
+  line-height: 1.6;
+  margin-top: 10px;
+  color: rgba(255, 255, 255, 0.85);
 }
 
 /* Parte derecha: formulario */
@@ -50,6 +54,7 @@ body {
 .panel-derecho h2 {
   font-size: 1.5rem;
   margin-bottom: 25px;
+  color: #2c5f2d;
 }
 
 .campo {
@@ -59,24 +64,39 @@ body {
 .campo label {
   display: block;
   margin-bottom: 5px;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #555;
 }
 
 .campo input,
 .campo select {
   width: 100%;
-  padding: 10px;
+  padding: 10px 12px;
   border: 1px solid #ccc;
-  font-size: 1rem;
+  border-radius: 4px;
+  font-size: 0.95rem;
+  background-color: #fff;
+  color: #333;
+  outline: none;
+}
+
+.campo input:focus,
+.campo select:focus {
+  border-color: #2c5f2d;
+  border-width: 2px;
 }
 
 .btn-primary {
   width: 100%;
-  padding: 10px;
+  padding: 11px;
   background-color: #2c5f2d;
   color: white;
   border: none;
+  border-radius: 4px;
   font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
   cursor: pointer;
   margin-top: 10px;
 }
@@ -105,6 +125,38 @@ body {
 
 .auth-link a {
   color: #2c5f2d;
+  text-decoration: none;
+}
+
+.auth-link a:hover {
+  text-decoration: underline;
+}
+
+/* Color del panel segun el rol */
+.panel-izquierdo.panel-admin {
+  background-color: #1a3a5c;
+}
+
+.panel-izquierdo.panel-user {
+  background-color: #5c3a1a;
+}
+
+/* Perfil de usuario */
+.perfil-info {
+  margin-top: 18px;
+}
+
+.perfil-info p {
+  font-size: 0.95rem;
+  color: #555;
+  padding: 8px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.perfil-info p span {
+  color: #111;
+  font-weight: bold;
+  margin-left: 6px;
 }
 
 /* Celular: las dos partes una debajo de la otra */
@@ -115,26 +167,50 @@ body {
 
   .panel-izquierdo {
     width: 100%;
-    padding: 25px 20px;
+    padding: 20px 16px;
   }
 
   .panel-izquierdo h1 {
-    font-size: 1.4rem;
-    margin-bottom: 8px;
+    font-size: 1.3rem;
+    margin-bottom: 6px;
   }
 
   .panel-izquierdo p {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
   }
 
   .panel-derecho {
     width: 100%;
-    padding: 25px 20px;
+    padding: 24px 16px;
     justify-content: flex-start;
   }
 
   .panel-derecho h2 {
-    font-size: 1.3rem;
-    margin-bottom: 18px;
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+  }
+
+  .campo input,
+  .campo select {
+    padding: 12px 10px;
+    font-size: 0.95rem;
+  }
+
+  .btn-primary {
+    padding: 13px;
+    font-size: 0.95rem;
+  }
+
+  .auth-link {
+    font-size: 0.85rem;
+  }
+
+  .mensaje-error,
+  .mensaje-exito {
+    font-size: 0.85rem;
+  }
+
+  .perfil-info p {
+    font-size: 0.88rem;
   }
 }

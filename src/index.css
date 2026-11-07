@@ -1,30 +1,149 @@
+/* =========================================================
+   Patitas al Rescate - index.css (paleta simplificada)
+   Un solo color de acento (verde) + grises neutros
+   ========================================================= */
+
+:root {
+  --verde: #2c5f2d;
+  --verde-oscuro: #1e4320;
+  --verde-claro: #3f8a41;
+  --verde-suave: #e8f2e8;
+  --fondo: #f3f7f3;
+  --blanco: #ffffff;
+  --texto: #2b2f2b;
+  --texto-suave: #6a716a;
+  --borde: #dfe8df;
+  --gris: #c9cfc9;
+  --sombra: 0 4px 14px rgba(44, 95, 45, 0.10);
+  --sombra-fuerte: 0 16px 34px rgba(44, 95, 45, 0.25);
+  --radio: 16px;
+}
+
+/* ---------- Base ---------- */
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-body {
-  font-family: 'Segoe UI', Arial, sans-serif;
-  background-color: #f0f2f5;
-  color: #333;
+html {
+  scroll-behavior: smooth;
 }
 
-/* Pantalla dividida en dos partes */
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: var(--fondo);
+  color: var(--texto);
+}
+
+::selection {
+  background: var(--verde);
+  color: #fff;
+}
+
+/* ---------- Animaciones ---------- */
+@keyframes subir {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes desde-izquierda {
+  from { opacity: 0; transform: translateX(-50px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes desde-derecha {
+  from { opacity: 0; transform: translateX(50px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes aparecer {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes aparecer-modal {
+  from { opacity: 0; transform: scale(0.88) translateY(24px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes degradado {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes huellas-deslizan {
+  from { background-position: 0 0; }
+  to   { background-position: 300px 300px; }
+}
+
+@keyframes linea-crece {
+  from { width: 0; }
+  to   { width: 90px; }
+}
+
+@keyframes flotar {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-5px); }
+}
+
+/* =========================================================
+   LOGIN / REGISTRO / PERFIL
+   ========================================================= */
 .pantalla {
   display: flex;
   min-height: 100vh;
 }
 
-/* Parte izquierda: nombre del sistema */
+/* Panel izquierdo: degradado verde en movimiento */
 .panel-izquierdo {
+  position: relative;
+  overflow: hidden;
   width: 40%;
-  background-color: #2c5f2d;
-  color: white;
   padding: 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  color: #fff;
+  background: linear-gradient(135deg, var(--verde), var(--verde-claro), var(--verde-oscuro));
+  background-size: 220% 220%;
+  animation:
+    desde-izquierda 0.7s ease both,
+    degradado 14s ease-in-out infinite;
+}
+
+/* Círculos decorativos que flotan */
+.panel-izquierdo::before,
+.panel-izquierdo::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.07);
+  pointer-events: none;
+}
+
+.panel-izquierdo::before {
+  width: 260px;
+  height: 260px;
+  top: -80px;
+  right: -80px;
+  animation: flotar 7s ease-in-out infinite;
+}
+
+.panel-izquierdo::after {
+  width: 180px;
+  height: 180px;
+  bottom: -60px;
+  left: -50px;
+  animation: flotar 9s ease-in-out infinite reverse;
+}
+
+.panel-izquierdo h1,
+.panel-izquierdo h2,
+.panel-izquierdo p {
+  position: relative;
+  z-index: 1;
 }
 
 .panel-izquierdo h1 {
@@ -32,31 +151,62 @@ body {
   margin-bottom: 10px;
   padding-bottom: 10px;
   border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  animation: subir 0.7s ease 0.2s both;
+}
+
+.panel-izquierdo h2 {
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.92);
+  animation: subir 0.7s ease 0.35s both;
 }
 
 .panel-izquierdo p {
   font-size: 1rem;
   line-height: 1.6;
   margin-top: 10px;
-  color: rgba(255, 255, 255, 0.85);
+  color: rgba(255, 255, 255, 0.88);
 }
 
-/* Parte derecha: formulario */
+/* Admin y usuario: mismo verde, solo cambia la intensidad */
+.panel-izquierdo.panel-admin {
+  background: linear-gradient(135deg, #1e4320, #2c5f2d, #173519);
+  background-size: 220% 220%;
+}
+
+.panel-izquierdo.panel-user {
+  background: linear-gradient(135deg, #4c8a4e, #6aa56c, #3f7a41);
+  background-size: 220% 220%;
+}
+
+/* Panel derecho */
 .panel-derecho {
   width: 60%;
-  background-color: white;
   padding: 40px 60px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background: var(--blanco);
+  animation: desde-derecha 0.7s ease both;
 }
 
 .panel-derecho h2 {
   font-size: 1.5rem;
   margin-bottom: 25px;
-  color: #2c5f2d;
+  color: var(--verde);
 }
 
+.panel-derecho > * {
+  animation: subir 0.6s ease both;
+}
+
+.panel-derecho > *:nth-child(1) { animation-delay: 0.10s; }
+.panel-derecho > *:nth-child(2) { animation-delay: 0.18s; }
+.panel-derecho > *:nth-child(3) { animation-delay: 0.26s; }
+.panel-derecho > *:nth-child(4) { animation-delay: 0.34s; }
+.panel-derecho > *:nth-child(5) { animation-delay: 0.42s; }
+
+/* Campos */
 .campo {
   margin-bottom: 15px;
 }
@@ -66,100 +216,562 @@ body {
   margin-bottom: 5px;
   font-size: 0.85rem;
   font-weight: 600;
-  color: #555;
+  color: var(--texto-suave);
 }
 
 .campo input,
 .campo select {
   width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  padding: 11px 12px;
+  border: 2px solid var(--borde);
+  border-radius: 10px;
   font-size: 0.95rem;
-  background-color: #fff;
-  color: #333;
+  background: var(--blanco);
+  color: var(--texto);
   outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
 }
 
 .campo input:focus,
 .campo select:focus {
-  border-color: #2c5f2d;
-  border-width: 2px;
+  border-color: var(--verde);
+  box-shadow: 0 0 0 4px rgba(44, 95, 45, 0.15);
+  transform: translateY(-1px);
 }
 
+/* Botón principal con brillo que lo cruza */
 .btn-primary {
+  position: relative;
+  overflow: hidden;
   width: 100%;
-  padding: 11px;
-  background-color: #2c5f2d;
-  color: white;
+  padding: 12px;
+  margin-top: 10px;
+  background: var(--verde);
+  color: #fff;
   border: none;
-  border-radius: 4px;
+  border-radius: 10px;
   font-size: 1rem;
   font-weight: bold;
   letter-spacing: 0.5px;
   cursor: pointer;
-  margin-top: 10px;
+  transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -80%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  transform: skewX(-20deg);
 }
 
 .btn-primary:hover {
-  background-color: #1e4320;
+  background: var(--verde-oscuro);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 18px rgba(44, 95, 45, 0.35);
+}
+
+.btn-primary:hover::after {
+  left: 130%;
+  transition: left 0.6s ease;
+}
+
+.btn-primary:active {
+  transform: translateY(0) scale(0.98);
 }
 
 .mensaje-error {
-  color: red;
+  color: #b3261e;
   font-size: 0.9rem;
   min-height: 18px;
   margin-bottom: 10px;
 }
 
 .mensaje-exito {
-  color: green;
+  color: var(--verde);
   font-size: 0.9rem;
   margin-bottom: 10px;
 }
 
+/* Enlaces con subrayado animado */
 .auth-link {
   margin-top: 20px;
   font-size: 0.9rem;
 }
 
 .auth-link a {
-  color: #2c5f2d;
+  position: relative;
+  color: var(--verde);
+  font-weight: 600;
   text-decoration: none;
 }
 
-.auth-link a:hover {
-  text-decoration: underline;
+.auth-link a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 2px;
+  background: var(--verde);
+  transition: width 0.3s ease;
 }
 
-/* Color del panel segun el rol */
-.panel-izquierdo.panel-admin {
-  background-color: #1a3a5c;
+.auth-link a:hover::after {
+  width: 100%;
 }
 
-.panel-izquierdo.panel-user {
-  background-color: #5c3a1a;
-}
-
-/* Perfil de usuario */
+/* Perfil */
 .perfil-info {
-  margin-top: 18px;
+  margin: 18px 0 10px;
 }
 
 .perfil-info p {
   font-size: 0.95rem;
-  color: #555;
-  padding: 8px 0;
-  border-bottom: 1px solid #ddd;
+  color: var(--texto-suave);
+  padding: 9px 0;
+  border-bottom: 1px solid var(--borde);
 }
 
 .perfil-info p span {
-  color: #111;
+  color: var(--texto);
   font-weight: bold;
   margin-left: 6px;
 }
 
-/* Celular: las dos partes una debajo de la otra */
+/* =========================================================
+   GESTIÓN DE MASCOTAS
+   ========================================================= */
+.gestion {
+  position: relative;
+  z-index: 0;
+  min-height: 100vh;
+  padding: 20px 24px;
+  animation: aparecer 0.5s ease both;
+}
+
+/* Marca de agua: huellas CSS que se deslizan muy lento */
+.gestion::before {
+  content: '';
+  position: fixed;
+  inset: -30%;
+  z-index: -1;
+  pointer-events: none;
+  transform: rotate(-15deg);
+  background-size: 150px 150px;
+  animation: huellas-deslizan 40s linear infinite;
+  background-image:
+    radial-gradient(ellipse 20px 16px at 75px 100px, rgba(44, 95, 45, 0.07) 98%, transparent 100%),
+    radial-gradient(ellipse 7px 9px at 52px 70px, rgba(44, 95, 45, 0.07) 98%, transparent 100%),
+    radial-gradient(ellipse 7px 9px at 66px 56px, rgba(44, 95, 45, 0.07) 98%, transparent 100%),
+    radial-gradient(ellipse 7px 9px at 84px 56px, rgba(44, 95, 45, 0.07) 98%, transparent 100%),
+    radial-gradient(ellipse 7px 9px at 98px 70px, rgba(44, 95, 45, 0.07) 98%, transparent 100%);
+}
+
+.gestion h1 {
+  position: relative;
+  color: var(--verde);
+  font-size: 1.8rem;
+  margin-bottom: 18px;
+  padding-bottom: 8px;
+  animation: subir 0.5s ease both;
+}
+
+/* Línea decorativa que crece bajo el título */
+.gestion h1::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 4px;
+  width: 90px;
+  border-radius: 4px;
+  background: var(--verde);
+  animation: linea-crece 0.8s ease 0.3s both;
+}
+
+/* Botón volver */
+.btn-volver {
+  display: inline-block;
+  padding: 8px 16px;
+  margin-bottom: 14px;
+  background: var(--blanco);
+  color: var(--verde);
+  border: 2px solid var(--verde);
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
+}
+
+.btn-volver::before {
+  content: '\2190  ';
+  display: inline-block;
+  transition: transform 0.25s ease;
+}
+
+.btn-volver:hover {
+  background: var(--verde);
+  color: #fff;
+  transform: translateX(-3px);
+}
+
+.btn-volver:hover::before {
+  transform: translateX(-4px);
+}
+
+/* Aviso para USER: gris-verdoso, sin naranja */
+.aviso-permiso {
+  background: var(--verde-suave);
+  border-left: 5px solid var(--verde);
+  color: var(--texto);
+  padding: 12px 16px;
+  border-radius: 10px;
+  margin-bottom: 14px;
+  line-height: 1.4;
+  animation: subir 0.5s ease 0.1s both;
+}
+
+/* Formulario */
+.form-mascota {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  animation: subir 0.6s ease 0.15s both;
+}
+
+.form-mascota input[type="text"] {
+  flex: 1 1 180px;
+  padding: 11px 12px;
+  border: 2px solid var(--borde);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.form-mascota input[type="file"] {
+  flex: 1 1 220px;
+  padding: 8px;
+  border: 2px dashed var(--gris);
+  border-radius: 10px;
+  background: var(--fondo);
+  cursor: pointer;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.form-mascota input[type="file"]:hover {
+  border-color: var(--verde);
+  background: var(--verde-suave);
+}
+
+.form-mascota input:focus {
+  border-color: var(--verde);
+  box-shadow: 0 0 0 4px rgba(44, 95, 45, 0.15);
+}
+
+.form-mascota button {
+  padding: 11px 26px;
+  background: var(--verde);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.form-mascota button:hover:not(:disabled) {
+  background: var(--verde-oscuro);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(44, 95, 45, 0.3);
+}
+
+/* Bloqueado (USER): todo gris */
+.form-mascota.bloqueado {
+  background: #ececec;
+  border-color: #d3d3d3;
+  box-shadow: none;
+}
+
+.form-mascota input:disabled,
+.form-mascota button:disabled {
+  background: #dcdcdc;
+  color: #8c8c8c;
+  border-color: #cbcbcb;
+  cursor: not-allowed;
+}
+
+.mensaje {
+  margin: 12px 0;
+  min-height: 20px;
+  font-weight: 600;
+  color: var(--verde);
+}
+
+/* =========================================================
+   CARDS (blancas, solo acento verde)
+   ========================================================= */
+.grid-tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 26px;
+  margin-top: 16px;
+}
+
+.tarjeta {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--blanco);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  animation: subir 0.55s ease both;
+}
+
+/* Aparecen una tras otra */
+.tarjeta:nth-child(1) { animation-delay: 0.05s; }
+.tarjeta:nth-child(2) { animation-delay: 0.12s; }
+.tarjeta:nth-child(3) { animation-delay: 0.19s; }
+.tarjeta:nth-child(4) { animation-delay: 0.26s; }
+.tarjeta:nth-child(5) { animation-delay: 0.33s; }
+.tarjeta:nth-child(6) { animation-delay: 0.40s; }
+.tarjeta:nth-child(n+7) { animation-delay: 0.45s; }
+
+/* Barra verde que se despliega arriba al pasar el mouse */
+.tarjeta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 0;
+  height: 4px;
+  background: var(--verde);
+  transition: width 0.4s ease;
+}
+
+.tarjeta:hover {
+  transform: translateY(-8px);
+  border-color: var(--verde);
+  box-shadow: var(--sombra-fuerte);
+}
+
+.tarjeta:hover::before {
+  width: 100%;
+}
+
+.tarjeta-foto {
+  display: block;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background: var(--verde-suave);
+  transition: transform 0.5s ease;
+}
+
+.tarjeta:hover .tarjeta-foto {
+  transform: scale(1.07);
+}
+
+.tarjeta-cuerpo {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  padding: 16px 18px 18px;
+  background: var(--blanco);
+  position: relative;
+  z-index: 1;
+}
+
+.tarjeta-cuerpo h3 {
+  margin: 0 0 4px;
+  font-size: 1.15rem;
+  color: var(--texto);
+}
+
+.tarjeta-cuerpo p {
+  margin: 0 0 16px;
+  font-size: 0.95rem;
+  color: var(--texto-suave);
+}
+
+.tarjeta-acciones {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+}
+
+/* Editar: verde sólido. Eliminar: contorno gris (sin rojo) */
+.btn-editar,
+.btn-eliminar {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease,
+              transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.btn-editar {
+  background: var(--verde);
+  color: #fff;
+  border: 2px solid var(--verde);
+}
+
+.btn-editar:hover:not(:disabled) {
+  background: var(--verde-oscuro);
+  border-color: var(--verde-oscuro);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(44, 95, 45, 0.3);
+}
+
+.btn-eliminar {
+  background: transparent;
+  color: var(--texto-suave);
+  border: 2px solid var(--gris);
+}
+
+.btn-eliminar:hover:not(:disabled) {
+  background: var(--texto);
+  border-color: var(--texto);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.btn-editar:active:not(:disabled),
+.btn-eliminar:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+/* Desactivados (USER) */
+.btn-editar:disabled,
+.btn-eliminar:disabled {
+  background: #e3e3e3;
+  color: #9a9a9a;
+  border-color: #d3d3d3;
+  cursor: not-allowed;
+}
+
+.mensaje-vacio {
+  text-align: center;
+  color: var(--texto-suave);
+  padding: 30px 0;
+}
+
+/* =========================================================
+   MODAL
+   ========================================================= */
+.modal-fondo {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(20, 40, 21, 0.55);
+  backdrop-filter: blur(4px);
+  animation: aparecer 0.25s ease both;
+}
+
+.modal {
+  width: 100%;
+  max-width: 440px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 24px;
+  background: var(--blanco);
+  border-top: 5px solid var(--verde);
+  border-radius: var(--radio);
+  box-shadow: 0 24px 54px rgba(0, 0, 0, 0.35);
+  animation: aparecer-modal 0.35s ease both;
+}
+
+.modal h2 {
+  color: var(--verde);
+  margin-bottom: 14px;
+}
+
+.modal label {
+  display: block;
+  margin: 12px 0 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--texto-suave);
+}
+
+.modal input[type="text"],
+.modal input[type="file"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 2px solid var(--borde);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.modal input:focus {
+  border-color: var(--verde);
+  box-shadow: 0 0 0 4px rgba(44, 95, 45, 0.15);
+}
+
+.modal-botones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn-cancelar,
+.btn-guardar {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.btn-cancelar {
+  background: #e8e8e8;
+  color: var(--texto);
+}
+
+.btn-cancelar:hover {
+  background: #d6d6d6;
+  transform: translateY(-2px);
+}
+
+.btn-guardar {
+  background: var(--verde);
+  color: #fff;
+}
+
+.btn-guardar:hover {
+  background: var(--verde-oscuro);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(44, 95, 45, 0.3);
+}
+
+/* =========================================================
+   TABLET Y CELULAR
+   ========================================================= */
 @media (max-width: 768px) {
   .pantalla {
     flex-direction: column;
@@ -167,7 +779,8 @@ body {
 
   .panel-izquierdo {
     width: 100%;
-    padding: 20px 16px;
+    padding: 22px 16px;
+    animation: subir 0.5s ease both, degradado 14s ease-in-out infinite;
   }
 
   .panel-izquierdo h1 {
@@ -175,14 +788,15 @@ body {
     margin-bottom: 6px;
   }
 
-  .panel-izquierdo p {
-    font-size: 0.88rem;
+  .panel-izquierdo h2 {
+    font-size: 1rem;
   }
 
   .panel-derecho {
     width: 100%;
     padding: 24px 16px;
     justify-content: flex-start;
+    animation: subir 0.6s ease both;
   }
 
   .panel-derecho h2 {
@@ -193,7 +807,6 @@ body {
   .campo input,
   .campo select {
     padding: 12px 10px;
-    font-size: 0.95rem;
   }
 
   .btn-primary {
@@ -201,268 +814,14 @@ body {
     font-size: 0.95rem;
   }
 
-  .auth-link {
-    font-size: 0.85rem;
-  }
-
+  .auth-link,
   .mensaje-error,
-  .mensaje-exito {
-    font-size: 0.85rem;
-  }
-
+  .mensaje-exito,
   .perfil-info p {
     font-size: 0.88rem;
   }
 }
 
-/* ===== Gestión de mascotas ===== */
-.gestion {
-  width: 100%;
-  min-height: 100vh;
-  padding: 16px 24px;
-  background-color: #f0f2f5;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cg fill='%232c5f2d' fill-opacity='0.07' transform='rotate(-20 70 70)'%3E%3Cellipse cx='70' cy='86' rx='20' ry='16'/%3E%3Cellipse cx='44' cy='62' rx='7' ry='10'/%3E%3Cellipse cx='60' cy='48' rx='7' ry='10'/%3E%3Cellipse cx='80' cy='48' rx='7' ry='10'/%3E%3Cellipse cx='96' cy='62' rx='7' ry='10'/%3E%3C/g%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 140px 140px;
-}
-
-.gestion h1 {
-  font-size: 1.6rem;
-  color: #2c5f2d;
-  margin-bottom: 14px;
-}
-
-/* Formulario: una barra blanca que ocupa todo el ancho */
-.form-mascota {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px;
-  background: #fff;
-  padding: 14px 16px;
-  border-radius: 10px;
-  border: 1px solid #dde3dd;
-  margin-bottom: 12px;
-}
-
-.form-mascota label {
-  font-size: 0.9rem;
-  color: #555;
-}
-
-.form-mascota input[type="text"] {
-  flex: 1 1 160px;
-  padding: 8px 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-}
-
-.form-mascota button {
-  padding: 9px 20px;
-  background-color: #2c5f2d;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.mensaje {
-  min-height: 20px;
-  margin-bottom: 10px;
-  color: #2c5f2d;
-  font-size: 0.9rem;
-}
-
-/* Grid: aprovecha todo el ancho de la pantalla */
-.grid-tarjetas {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 18px;
-}
-
-.tarjeta {
-  border-radius: 14px;
-  overflow: hidden;
-  background: #fff;
-  border: 1px solid #dde3dd;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.tarjeta:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-.tarjeta-foto {
-  width: 100%;
-  height: 210px;
-  object-fit: cover;
-  display: block;
-}
-
-.tarjeta-cuerpo {
-  padding: 12px 14px 14px;
-}
-
-.tarjeta-cuerpo h3 {
-  color: #222;
-  text-transform: capitalize;
-}
-
-.tarjeta-cuerpo p {
-  color: #666;
-  font-size: 0.9rem;
-  margin: 2px 0 10px;
-}
-
-.tarjeta-acciones {
-  display: flex;
-  gap: 8px;
-}
-
-/* Botones con un solo color (verde); Eliminar solo cambia al pasar el mouse */
-.btn-editar,
-.btn-eliminar {
-  flex: 1;
-  padding: 8px 10px;
-  background: #fff;
-  color: #2c5f2d;
-  border: 1px solid #2c5f2d;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.btn-editar:hover {
-  background: #2c5f2d;
-  color: #fff;
-}
-
-.btn-eliminar {
-  color: #666;
-  border-color: #bbb;
-}
-
-.btn-eliminar:hover {
-  background: #d9363e;
-  border-color: #d9363e;
-  color: #fff;
-}
-
-/* ===== Modal ===== */
-.modal-fondo {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-  z-index: 1000;
-}
-
-.modal {
-  background: #fff;
-  border-radius: 14px;
-  padding: 24px;
-  width: 100%;
-  max-width: 420px;
-}
-
-.modal h2 {
-  margin-bottom: 14px;
-  color: #2c5f2d;
-}
-
-.modal label {
-  display: block;
-  margin-top: 10px;
-  font-size: 0.85rem;
-  font-weight: 600;
-}
-
-.modal input {
-  width: 100%;
-  padding: 8px;
-  margin-top: 4px;
-}
-
-.modal-botones {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: 18px;
-}
-
-.btn-cancelar,
-.btn-guardar {
-  padding: 8px 14px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  color: #fff;
-}
-
-.btn-cancelar {
-  background: #888;
-}
-
-.btn-guardar {
-  background: #2c5f2d;
-}
-
-/* Aviso para usuarios sin permiso */
-.aviso-permiso {
-  background: #fff8e1;
-  border: 1px solid #e0c36a;
-  color: #7a5c00;
-  padding: 10px 14px;
-  border-radius: 8px;
-  margin-bottom: 12px;
-  font-size: 0.9rem;
-}
-
-/* Controles desactivados en gris */
-.form-mascota.bloqueado {
-  background: #e4e4e4;
-}
-
-.form-mascota input:disabled,
-.form-mascota button:disabled,
-.btn-editar:disabled,
-.btn-eliminar:disabled {
-  background: #d0d0d0;
-  color: #888;
-  border-color: #bbb;
-  cursor: not-allowed;
-}
-
-.btn-editar:disabled:hover,
-.btn-eliminar:disabled:hover {
-  background: #d0d0d0;
-  color: #888;
-  border-color: #bbb;
-}
-
-.btn-volver {
-  padding: 8px 16px;
-  margin-bottom: 12px;
-  background: #fff;
-  color: #2c5f2d;
-  border: 1px solid #2c5f2d;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-.btn-volver:hover {
-  background: #2c5f2d;
-  color: #fff;
-}
-
-/* ===== Ajustes para móvil ===== */
 @media (max-width: 600px) {
   .gestion {
     padding: 14px 16px;
@@ -470,10 +829,9 @@ body {
 
   .gestion h1 {
     font-size: 1.4rem;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
   }
 
-  /* Formulario: campos en columna, sin salirse del cuadro */
   .form-mascota {
     flex-direction: column;
     align-items: stretch;
@@ -487,18 +845,11 @@ body {
     width: 100%;
     flex: none;
     padding: 12px;
-    box-sizing: border-box;
   }
 
-  .aviso-permiso {
-    padding: 12px 16px;
-    line-height: 1.4;
-  }
-
-  /* Tarjetas: una por fila, con más separación */
   .grid-tarjetas {
     grid-template-columns: 1fr;
-    gap: 24px;
+    gap: 26px;
     margin-top: 8px;
   }
 
@@ -512,14 +863,12 @@ body {
 
   .tarjeta-cuerpo h3 {
     font-size: 1.2rem;
-    margin-bottom: 4px;
   }
 
   .tarjeta-cuerpo p {
     margin: 4px 0 16px;
   }
 
-  /* Botones más cómodos de tocar */
   .tarjeta-acciones {
     gap: 12px;
   }
@@ -530,7 +879,27 @@ body {
     font-size: 1rem;
   }
 
-  .mensaje {
-    margin: 12px 0;
+  .modal {
+    padding: 18px;
+  }
+
+  .modal-botones {
+    flex-direction: column-reverse;
+  }
+
+  .btn-cancelar,
+  .btn-guardar {
+    width: 100%;
+    padding: 12px;
+  }
+}
+
+/* Respeta a quienes desactivan las animaciones en su sistema */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
   }
 }

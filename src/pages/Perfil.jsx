@@ -7,7 +7,6 @@ function Perfil() {
     const [mensaje, setMensaje] = useState("");
     const navigate = useNavigate();
 
-    // Leer el rol directamente de localStorage (no necesita estado)
     let rol = localStorage.getItem("rol");
     let clasePerfil;
 
@@ -44,12 +43,16 @@ function Perfil() {
             .catch(function (error) {
                 setMensaje("No se pudo cargar el perfil: " + error.message);
             });
-    }, []);
+    }, [navigate]);
 
     function cerrarSesion() {
         localStorage.removeItem("token");
         localStorage.removeItem("rol");
         navigate("/login");
+    }
+
+    function irAGestion() {
+        navigate("/gestion");
     }
 
     return (
@@ -68,6 +71,10 @@ function Perfil() {
                     <p>{datos}</p>
                 </div>
 
+                <button className="btn-primary" onClick={irAGestion}>
+                    Gestionar Mascotas
+                </button>
+
                 <button className="btn-primary" onClick={cerrarSesion}>
                     Cerrar Sesión
                 </button>
@@ -75,5 +82,6 @@ function Perfil() {
         </div>
     );
 }
+
 
 export default Perfil;

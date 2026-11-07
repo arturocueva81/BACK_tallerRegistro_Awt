@@ -214,3 +214,237 @@ body {
     font-size: 0.88rem;
   }
 }
+
+/* ===== Gestión de mascotas ===== */
+.gestion {
+  width: 100%;
+  min-height: 100vh;
+  padding: 16px 24px;
+  background-color: #f0f2f5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cg fill='%232c5f2d' fill-opacity='0.07' transform='rotate(-20 70 70)'%3E%3Cellipse cx='70' cy='86' rx='20' ry='16'/%3E%3Cellipse cx='44' cy='62' rx='7' ry='10'/%3E%3Cellipse cx='60' cy='48' rx='7' ry='10'/%3E%3Cellipse cx='80' cy='48' rx='7' ry='10'/%3E%3Cellipse cx='96' cy='62' rx='7' ry='10'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 140px 140px;
+}
+
+.gestion h1 {
+  font-size: 1.6rem;
+  color: #2c5f2d;
+  margin-bottom: 14px;
+}
+
+/* Formulario: una barra blanca que ocupa todo el ancho */
+.form-mascota {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  background: #fff;
+  padding: 14px 16px;
+  border-radius: 10px;
+  border: 1px solid #dde3dd;
+  margin-bottom: 12px;
+}
+
+.form-mascota label {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.form-mascota input[type="text"] {
+  flex: 1 1 160px;
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.form-mascota button {
+  padding: 9px 20px;
+  background-color: #2c5f2d;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.mensaje {
+  min-height: 20px;
+  margin-bottom: 10px;
+  color: #2c5f2d;
+  font-size: 0.9rem;
+}
+
+/* Grid: aprovecha todo el ancho de la pantalla */
+.grid-tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+.tarjeta {
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid #dde3dd;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tarjeta:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.tarjeta-foto {
+  width: 100%;
+  height: 210px;
+  object-fit: cover;
+  display: block;
+}
+
+.tarjeta-cuerpo {
+  padding: 12px 14px 14px;
+}
+
+.tarjeta-cuerpo h3 {
+  color: #222;
+  text-transform: capitalize;
+}
+
+.tarjeta-cuerpo p {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 2px 0 10px;
+}
+
+.tarjeta-acciones {
+  display: flex;
+  gap: 8px;
+}
+
+/* Botones con un solo color (verde); Eliminar solo cambia al pasar el mouse */
+.btn-editar,
+.btn-eliminar {
+  flex: 1;
+  padding: 8px 10px;
+  background: #fff;
+  color: #2c5f2d;
+  border: 1px solid #2c5f2d;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btn-editar:hover {
+  background: #2c5f2d;
+  color: #fff;
+}
+
+.btn-eliminar {
+  color: #666;
+  border-color: #bbb;
+}
+
+.btn-eliminar:hover {
+  background: #d9363e;
+  border-color: #d9363e;
+  color: #fff;
+}
+
+/* ===== Modal ===== */
+.modal-fondo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 1000;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 14px;
+  padding: 24px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.modal h2 {
+  margin-bottom: 14px;
+  color: #2c5f2d;
+}
+
+.modal label {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.modal input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 4px;
+}
+
+.modal-botones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+.btn-cancelar,
+.btn-guardar {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: #fff;
+}
+
+.btn-cancelar {
+  background: #888;
+}
+
+.btn-guardar {
+  background: #2c5f2d;
+}
+
+/* Aviso para usuarios sin permiso */
+.aviso-permiso {
+  background: #fff8e1;
+  border: 1px solid #e0c36a;
+  color: #7a5c00;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  font-size: 0.9rem;
+}
+
+/* Controles desactivados en gris */
+.form-mascota.bloqueado {
+  background: #e4e4e4;
+}
+
+.form-mascota input:disabled,
+.form-mascota button:disabled,
+.btn-editar:disabled,
+.btn-eliminar:disabled {
+  background: #d0d0d0;
+  color: #888;
+  border-color: #bbb;
+  cursor: not-allowed;
+}
+
+.btn-editar:disabled:hover,
+.btn-eliminar:disabled:hover {
+  background: #d0d0d0;
+  color: #888;
+  border-color: #bbb;
+}
+
+

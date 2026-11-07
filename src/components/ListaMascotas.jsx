@@ -7,6 +7,8 @@ function TarjetaMascota(props) {
 
     // Pide la foto al backend y la convierte en una URL para mostrarla
     useEffect(function () {
+        let urlCreada = '';
+
         async function cargarFoto() {
             try {
                 const respuesta = await fetch(
@@ -14,8 +16,8 @@ function TarjetaMascota(props) {
                 );
                 if (respuesta.ok) {
                     const blob = await respuesta.blob();
-                    const url = URL.createObjectURL(blob);
-                    setUrlFoto(url);
+                    urlCreada = URL.createObjectURL(blob);
+                    setUrlFoto(urlCreada);
                 }
             } catch (error) {
                 console.error('Error al cargar la foto', error);
@@ -23,6 +25,13 @@ function TarjetaMascota(props) {
         }
 
         cargarFoto();
+
+        // Limpieza: libera la URL anterior cuando la foto cambia o la tarjeta desaparece
+        return function () {
+            if (urlCreada !== '') {
+                URL.revokeObjectURL(urlCreada);
+            }
+        };
     }, [mascota.id, props.version]);
 
     function clicEditar() {
